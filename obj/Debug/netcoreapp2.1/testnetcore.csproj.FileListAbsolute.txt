@@ -1,0 +1,11 @@
+/home/noam/dev/testnetcore/bin/Debug/netcoreapp2.1/testnetcore.deps.json
+/home/noam/dev/testnetcore/bin/Debug/netcoreapp2.1/testnetcore.runtimeconfig.json
+/home/noam/dev/testnetcore/bin/Debug/netcoreapp2.1/testnetcore.runtimeconfig.dev.json
+/home/noam/dev/testnetcore/bin/Debug/netcoreapp2.1/testnetcore.dll
+/home/noam/dev/testnetcore/bin/Debug/netcoreapp2.1/testnetcore.pdb
+/home/noam/dev/testnetcore/obj/Debug/netcoreapp2.1/testnetcore.csprojAssemblyReference.cache
+/home/noam/dev/testnetcore/obj/Debug/netcoreapp2.1/testnetcore.csproj.CoreCompileInputs.cache
+/home/noam/dev/testnetcore/obj/Debug/netcoreapp2.1/testnetcore.AssemblyInfoInputs.cache
+/home/noam/dev/testnetcore/obj/Debug/netcoreapp2.1/testnetcore.AssemblyInfo.cs
+/home/noam/dev/testnetcore/obj/Debug/netcoreapp2.1/testnetcore.dll
+/home/noam/dev/testnetcore/obj/Debug/netcoreapp2.1/testnetcore.pdb
