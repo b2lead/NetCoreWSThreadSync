@@ -6,52 +6,33 @@ namespace testnetcore
 {
     class Program
     {
+        static WebSocketMoke _WS = new WebSocketMoke();
         static ManualResetEvent _stop = new ManualResetEvent(false);
+        static AutoResetEvent _HandleChanges = new AutoResetEvent(false);
         static void Main(string[] args)
         {
             Console.WriteLine("started");
-
-            var t1 = Task.Run(() => WS_InternalThread());
             var t2 = Task.Run(() => ProgramHandleEventThread());
+            _WS.OnMessage+=OnMessage;
+            _WS.Start();
+
             Console.ReadLine();
             _stop.Set();
              Console.WriteLine("stop was send");
-            Task.WaitAll(t1,t2);
+             _WS.Stop();
+            t2.Wait();
             
             Console.WriteLine("finish prog");
         }
 
-       
-
-        static int _eventCounetr=0;
-        static object _locker=new object();
-
-        private static void WS_InternalThread()
+        private static void OnMessage(int number)
         {
-            while(!_stop.WaitOne(1000))
-            {
-                _eventCounetr++;
-                Console.WriteLine(string.Format("WS_StateChanges->{0}",_eventCounetr));
-                
-                Task.Run(()=>HandleStateChange(_eventCounetr));
-                
-            }
-        }
-
-        private static void HandleStateChange(int eventNumber)
-        {
-            lock(_locker)
-            {
-                ProgramStateChange(eventNumber);
-            }
-        }
-        private static void ProgramStateChange(int eventNumber)
-        {
-            Console.WriteLine(string.Format("start HandleStateChange->{0}",eventNumber));
+            Console.WriteLine(string.Format("start HandleStateChange->{0}",number));
             _HandleChanges.Set();
-            Console.WriteLine(string.Format("finish HandleStateChange->{0}",eventNumber));        
+            Console.WriteLine(string.Format("finish HandleStateChange->{0}",number));  
         }
-        static AutoResetEvent _HandleChanges = new AutoResetEvent(false);
+
+        
         private static void ProgramHandleEventThread()
         {
             while(true)
@@ -63,6 +44,7 @@ namespace testnetcore
                     Console.WriteLine(string.Format("stop logic signal received")); 
                     break;
                 }
+                Console.WriteLine(string.Format("start logic")); 
                 Thread.Sleep(5000);
                 Console.WriteLine(string.Format("finish logic"));          
             }
